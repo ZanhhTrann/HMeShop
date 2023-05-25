@@ -1,6 +1,14 @@
 import 'package:get/get.dart';
 
+import '../../../controller/Controller.dart';
+
+// thứ tự kiểm tra dữ liệu SignUp
+//- kiểm tra các trường thông tin có null hay không
+//- kiểm tra xem email có đúng định dạng hay không
+//- kiểm tra email đã tồn tại hay chưa
+// -kiểm tra mật khẩu và mật khẩu nhập lại có giống nhau hay không
 bool SignUpCheck({String? email, String? name, String? pw, String? rpw}) {
+  final controller = Get.find<Controller>();
   if (name == '' || email == '' || pw == '' || rpw == '') {
     Get.snackbar(
       'False',
@@ -11,6 +19,17 @@ bool SignUpCheck({String? email, String? name, String? pw, String? rpw}) {
     return false;
   } else {
     if (email!.contains('@gmail.com')) {
+      for (int i = 0; i < controller.Account.length; i++) {
+        if (email == controller.Account[i].email) {
+          Get.snackbar(
+            'False',
+            'Email has been exist!',
+            snackPosition: SnackPosition.TOP,
+            duration: const Duration(seconds: 3),
+          );
+          return false;
+        }
+      }
       if (pw == rpw) {
         Get.snackbar(
           'Success',
