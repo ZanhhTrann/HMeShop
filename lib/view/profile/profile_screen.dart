@@ -3,39 +3,41 @@ import 'package:get/get.dart';
 import 'package:hmeshop/view/Login_SignUp/Login_check.dart';
 import 'package:velocity_x/velocity_x.dart';
 
-import '../../const/String.dart';
 import '../../controller/Controller.dart';
 import '../../widget/button/our_button.dart';
-import '../../widget/custom/custom_textfield.dart';
 import '../splash_screen/splash_screen.dart';
-import 'SignUp_screen.dart';
+import 'account.dart';
 
-class LoginScreen extends StatefulWidget {
-  const LoginScreen({Key? key}) : super(key: key);
+class ProfileScreen extends StatefulWidget {
+  const ProfileScreen({Key? key}) : super(key: key);
 
   @override
-  State<LoginScreen> createState() => _LoginScreenState();
+  State<ProfileScreen> createState() => _ProfileScreenState();
 }
 
-class _LoginScreenState extends State<LoginScreen> {
+class _ProfileScreenState extends State<ProfileScreen> {
   void _handleCartButtonPress({BuildContext? context}) {
     // Register FavoriteController instance
     Get.put(Controller());
     // Get reference to Controller
     final controller = Get.find<Controller>();
-    controller.setCheckLogin(check: true);
+    controller.setCheckLogin(check: false);
     // Navigate to FavoriteScreen
     // Get.to(FavoriteScreen());
     Get.to(() => SplashScreen());
+    Get.snackbar(
+      'Success',
+      'To Log Out!',
+      snackPosition: SnackPosition.TOP,
+      duration: const Duration(seconds: 3),
+    );
   }
 
   final controller = Get.find<Controller>();
   // id luu
-  TextEditingController id = TextEditingController();
-  TextEditingController pass = TextEditingController();
-
   @override
   Widget build(BuildContext context) {
+    final account acc = controller.getProfile().getAccount();
     return Container(
         child: Scaffold(
       // bo phan ke soc khi an ban phim
@@ -49,7 +51,7 @@ class _LoginScreenState extends State<LoginScreen> {
               width: 40,
             ),
             10.heightBox,
-            "Login to $eName"
+            "Infor Account"
                 .text
                 .fontFamily('bold')
                 .color(Colors.red)
@@ -58,39 +60,16 @@ class _LoginScreenState extends State<LoginScreen> {
             10.heightBox,
             Column(
               children: [
-                customTextField(
-                    title: 'Email',
-                    hint: 'Email@gmail.com',
-                    controller: id,
-                    check: false),
-                customTextField(
-                    title: 'Password',
-                    hint: "*********",
-                    controller: pass,
-                    check: true),
-                Align(
-                  alignment: Alignment.centerRight,
-                  child: TextButton(
-                      onPressed: () {}, child: 'Forget password'.text.make()),
-                ),
+                'Name: ${acc.name}'.text.color(Colors.red).make(),
+                10.heightBox,
+                'Email: ${acc.email}'.text.color(Colors.red).make(),
                 5.heightBox,
                 ourButton(
                     color: Colors.red,
-                    title: 'Login',
+                    title: 'LogOut',
                     textColor: Colors.white,
                     onPress: () {
-                      if (LoginCheck(eMail: id.text, pw: pass.text) == true)
-                        _handleCartButtonPress(context: context);
-                    }).box.width(context.screenWidth - 50).make(),
-                5.heightBox,
-                'Create New Account'.text.black.make(),
-                5.heightBox,
-                ourButton(
-                    color: Color.fromARGB(255, 228, 228, 228),
-                    title: 'Signup',
-                    textColor: Colors.red,
-                    onPress: () {
-                      Get.to(() => const SignupScreen());
+                      _handleCartButtonPress(context: context);
                     }).box.width(context.screenWidth - 50).make(),
               ],
             )

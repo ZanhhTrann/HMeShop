@@ -3,10 +3,12 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 import 'package:get/get.dart';
+import 'package:hmeshop/view/Login_SignUp/Login_screen.dart';
 import 'package:hmeshop/view/cart/cart_screen.dart';
 import 'package:hmeshop/view/favorite/favorite_screen.dart';
 
 import '../../controller/Controller.dart';
+import '../../view/profile/profile_screen.dart';
 
 PreferredSizeWidget buildAppbar() {
   final controller = Get.find<Controller>();
@@ -16,13 +18,25 @@ PreferredSizeWidget buildAppbar() {
     ),
     elevation: 0,
     backgroundColor: Colors.white,
-    leading: IconButton(onPressed: () {}, icon: const Icon(Icons.menu)),
+    leading: IconButton(
+        onPressed: () {
+          Get.back();
+        },
+        icon: const Icon(Icons.menu)),
     title: Image.network(
       'https://th.bing.com/th/id/OIP.y-4YHSc6VhofvP2JE5xiQgHaE3?pid=ImgDet&w=512&h=337&rs=1',
       width: 40,
     ),
     actions: [
-      IconButton(onPressed: () {}, icon: const Icon(Icons.person_3_outlined)),
+      IconButton(
+          onPressed: () {
+            if (controller.checkLogin == false) {
+              Get.to(() => LoginScreen());
+            } else {
+              Get.to(() => ProfileScreen());
+            }
+          },
+          icon: const Icon(Icons.person_3_outlined)),
       GetBuilder<Controller>(
         builder: (controller) {
           return IconButton(

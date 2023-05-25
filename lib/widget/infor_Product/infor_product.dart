@@ -21,6 +21,8 @@ void _handleFavoriteButtonPress(BuildContext context, product pro) {
   controller.addFavorite(pro);
   // Navigate to FavoriteScreen
   // Get.to(FavoriteScreen());
+
+  // hiện  thông báo thêm thành công
   Get.snackbar(
     'Success',
     '${pro.getName()} has been added to favorites!',
@@ -86,6 +88,8 @@ Widget inforProduct({product? pro, BuildContext? context}) {
           .margin(EdgeInsets.only(left: 10))
           .make(),
       5.heightBox,
+
+// nút thêm đồ vào giỏ hàng
       SizedBox(
         width: 100,
         height: 30,
@@ -96,6 +100,7 @@ Widget inforProduct({product? pro, BuildContext? context}) {
             showModalBottomSheet(
               context: context,
               builder: (context) => ProductModal(pro: pro),
+              // ProductModal(pro: pro) hàm hiện menu để chọn màu, size , số lượng
             );
           },
           child: 'Add to cart'.text.size(8).make(),
