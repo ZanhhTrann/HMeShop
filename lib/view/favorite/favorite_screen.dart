@@ -5,6 +5,7 @@ import 'package:get/get.dart';
 import 'package:get/get_state_manager/src/simple/get_state.dart';
 import 'package:hmeshop/API/API_DATA/list_products/product.dart';
 import 'package:hmeshop/view/favorite/favorite.dart';
+import 'package:hmeshop/view/product/show_infor_product.dart';
 import 'package:hmeshop/widget/appbar/build_Appbar.dart';
 import 'package:velocity_x/velocity_x.dart';
 
@@ -93,7 +94,10 @@ class FavoriteScreen extends StatelessWidget {
                         ],
                       )
                     ],
-                  );
+                  ).onTap(() {
+                    Get.to(
+                        () => showInforProduct(pro: favoriteProduct.getPro()));
+                  });
                 },
               )
             : Center(

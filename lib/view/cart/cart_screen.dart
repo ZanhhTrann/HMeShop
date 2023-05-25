@@ -2,6 +2,7 @@
 
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:hmeshop/view/product/show_infor_product.dart';
 import 'package:velocity_x/velocity_x.dart';
 
 import '../../controller/Controller.dart';
@@ -38,9 +39,13 @@ class _cartScreenState extends State<cartScreen> {
     });
   }
 
-  void _decrementCount(cat) {
+  void _decrementCount(cart) {
     setState(() {
-      cat.removeNum();
+      cart.removeNum();
+      if (cart.getNum() == 0) {
+        final c = Get.find<Controller>();
+        c.removeCart(cart);
+      }
     });
   }
 
@@ -167,7 +172,10 @@ class _cartScreenState extends State<cartScreen> {
                         ],
                       )
                     ],
-                  );
+                  ).onTap(() {
+                    Get.to(() => showInforProduct(
+                        pro: controller.cartProducts[index].getPro()));
+                  });
                 })
             : Center(
                 child:

@@ -46,10 +46,10 @@ class _ShowListProductsState extends State<ShowListProducts> {
                                 crossAxisCount: 2,
                                 mainAxisSpacing: 4,
                                 crossAxisSpacing: 12,
-                                mainAxisExtent: 220),
+                                mainAxisExtent: 300),
                         itemBuilder: (context, index) {
                           return SProduct(
-                                  product: snapshot.data![index], height: 220)
+                                  product: snapshot.data![index], height: 250)
                               .box
                               .roundedSM
                               .make();

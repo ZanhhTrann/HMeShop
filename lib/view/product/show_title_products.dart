@@ -39,7 +39,7 @@ class _ShowTitleProductState extends State<ShowTitleProduct> {
                   .box
                   .margin(EdgeInsets.only(left: 20))
                   .make(),
-              Search(),
+              Search(cat: widget.list!),
               GridVP(cat: widget.list!)
             ],
           ),

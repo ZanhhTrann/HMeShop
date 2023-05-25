@@ -41,9 +41,9 @@ class Controller extends GetxController {
     update();
   }
 
-  void removeCart(product? product) {
+  void removeCart(cart? cart) {
     cartProducts
-        .removeWhere((ca) => ca.getPro().getCode() == product?.getCode());
+        .removeWhere((ca) => ca.getPro().getCode() == cart?.getPro().getCode());
     cartCount--;
     update();
   }

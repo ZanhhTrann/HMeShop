@@ -43,7 +43,7 @@ Widget inforProduct({product? pro, BuildContext? context}) {
           .getName()
           .text
           .black
-          .size(16)
+          .size(14)
           .fontFamily('bold')
           .make()
           .box
@@ -68,8 +68,9 @@ Widget inforProduct({product? pro, BuildContext? context}) {
               pro.getSale() == true
                   ? (('\$ ${pro.getRedprice()}')
                       .text
-                      .size(16)
+                      .size(14)
                       .fontFamily('semibold')
+                      .color(Colors.red)
                       .make()
                       .box
                       .margin(EdgeInsets.only(left: 10))

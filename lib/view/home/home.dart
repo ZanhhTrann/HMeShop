@@ -38,7 +38,7 @@ class _HomeState extends State<Home> {
               physics: const BouncingScrollPhysics(),
               child: Row(
                 children: [
-                  Search(),
+                  Search(cat: widget.cat),
                   ListCat(list: widget.cat),
                 ],
               ),
